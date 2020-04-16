@@ -21,18 +21,18 @@ const student = new mongoose.Schema(
     },
   },
   { timestamps: true },
-);
+); //student's schema
 
 const school = new mongoose.Schema({
   name: String,
-});
+}); //school's schema
 
-const School = new mongoose.model("school", school);
-const Student = new mongoose.model("student", student);
+const School = new mongoose.model("school", school); //creates school model
+const Student = new mongoose.model("student", student); //creates student's model
 
-connect()
+connect() //connects to the database and returns a promise
   .then(async (connection) => {
-    const school = await School.create({ name: "Jkuat" });
+    const school = await School.create({ name: "Jkuat" }); //creates a student
     const student = await Student.create({
       firstName: "Myke",
       favFoods: ["Rice", "Chapati"],
@@ -40,6 +40,8 @@ connect()
       school: school._id,
     });
     const match = await Student.findById(student._id).populate("school").exec();
+    //populate(field) takes the value of the reffered field and fills it in the refference field
+    //exec() executes the query.
     console.log(match);
   })
   .catch((err) => console.error(err));
