@@ -17,7 +17,7 @@ const student = new mongoose.Schema(
     school: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "school",
+      ref: "school", //the school's details to be fetched from the 'school' schema
     },
   },
   { timestamps: true },
